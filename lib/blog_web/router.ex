@@ -17,11 +17,7 @@ defmodule BlogWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", BlogWeb do
-    pipe_through :browser
 
-    get "/*path", PageController, :angular
-  end
 
   # Other scopes may use custom stacks.
   # scope "/api", BlogWeb do
@@ -68,6 +64,14 @@ defmodule BlogWeb.Router do
       on_mount: [{BlogWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      scope "/admin" do
+        live "/posts", PostLive.Index, :index
+        live "/posts/new", PostLive.Index, :new
+        live "/posts/:id/edit", PostLive.Index, :edit
+        live "/posts/:id", PostLive.Show, :show
+        live "/posts/:id/show/edit", PostLive.Show, :edit
+      end
     end
   end
 
@@ -81,5 +85,13 @@ defmodule BlogWeb.Router do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
+  end
+
+
+
+  scope "/", BlogWeb do
+    pipe_through :browser
+
+    get "/*path", PageController, :angular
   end
 end

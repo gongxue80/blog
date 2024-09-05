@@ -18,7 +18,7 @@ defmodule BlogWeb.UserLoginLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/users/log_in")
-        |> follow_redirect(conn, "/")
+        |> follow_redirect(conn, ~p"/admin/posts")
 
       assert {:ok, _conn} = result
     end
@@ -36,7 +36,7 @@ defmodule BlogWeb.UserLoginLiveTest do
 
       conn = submit_form(form, conn)
 
-      assert redirected_to(conn) == ~p"/"
+      assert redirected_to(conn) == ~p"/admin/posts"
     end
 
     test "redirects to login page with a flash error if there are no valid credentials", %{
@@ -53,7 +53,7 @@ defmodule BlogWeb.UserLoginLiveTest do
 
       assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid email or password"
 
-      assert redirected_to(conn) == "/users/log_in"
+      assert redirected_to(conn) == ~p"/users/log_in"
     end
   end
 
