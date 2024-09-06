@@ -6,7 +6,7 @@ defmodule BlogWeb.PostLiveTest do
 
   @create_attrs %{status: "some status", title: "some title", content: "some content", slug: "some slug", published_at: "2024-09-04T13:12:00Z"}
   @update_attrs %{status: "some updated status", title: "some updated title", content: "some updated content", slug: "some updated slug", published_at: "2024-09-05T13:12:00Z"}
-  @invalid_attrs %{status: nil, title: nil, content: nil, slug: nil, published_at: nil}
+  @invalid_attrs %{status: "", title: "", content: "", slug: "", published_at: ""}
 
   defp create_post(_) do
     post = post_fixture()
