@@ -42,8 +42,7 @@ defmodule BlogWeb.PostLiveTest do
       assert_patch(index_live, ~p"/admin/posts")
 
       html = render(index_live)
-      assert html =~ "Save Post"
-      # assert html =~ "Post created successfully"
+      assert html =~ "Post created successfully"
       assert html =~ "some status"
     end
 
@@ -59,7 +58,7 @@ defmodule BlogWeb.PostLiveTest do
              |> form("#post-form", post: @invalid_attrs)
              |> render_submit() =~ "can&#39;t be blank"
 
-      assert index_live
+      index_live
              |> form("#post-form", post: @update_attrs)
              |> render_submit()
 
