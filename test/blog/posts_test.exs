@@ -16,7 +16,9 @@ defmodule Blog.PostsTest do
       assert post1.title == post2.title
       assert post1.content == post2.content
       assert post1.slug == post2.slug
-      assert DateTime.truncate(post1.published_at, :second) == DateTime.truncate(post2.published_at, :second)
+
+      assert DateTime.truncate(post1.published_at, :second) ==
+               DateTime.truncate(post2.published_at, :second)
     end
 
     test "list_posts/0 returns all posts" do
@@ -32,7 +34,13 @@ defmodule Blog.PostsTest do
     end
 
     test "create_post/1 with valid data creates a post" do
-      valid_attrs = %{status: "some status", title: "some title", content: "some content", slug: "some slug", published_at: ~U[2024-09-04 13:12:00Z]}
+      valid_attrs = %{
+        status: "some status",
+        title: "some title",
+        content: "some content",
+        slug: "some slug",
+        published_at: ~U[2024-09-04 13:12:00Z]
+      }
 
       assert {:ok, %Post{} = post} = Posts.create_post(valid_attrs)
       assert post.status == "some status"
@@ -48,7 +56,14 @@ defmodule Blog.PostsTest do
 
     test "update_post/2 with valid data updates the post" do
       post = post_fixture()
-      update_attrs = %{status: "some updated status", title: "some updated title", content: "some updated content", slug: "some updated slug", published_at: ~U[2024-09-05 13:12:00Z]}
+
+      update_attrs = %{
+        status: "some updated status",
+        title: "some updated title",
+        content: "some updated content",
+        slug: "some updated slug",
+        published_at: ~U[2024-09-05 13:12:00Z]
+      }
 
       assert {:ok, %Post{} = post} = Posts.update_post(post, update_attrs)
       assert post.status == "some updated status"

@@ -2,6 +2,8 @@ defmodule Blog.Posts.Post do
   use Blog.Schema
   import Ecto.Changeset
 
+  @type t :: %__MODULE__{}
+
   schema "posts" do
     field :status, :string
     field :title, :string

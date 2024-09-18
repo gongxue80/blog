@@ -37,6 +37,14 @@ defmodule Blog.Posts do
   end
 
   @doc """
+  Gets a single post by params.
+  """
+  @spec get_post_by!(params :: Keyword.t()) :: Post.t() | term()
+  def get_post_by!(params) do
+    Repo.get_by!(Post, params)
+  end
+
+  @doc """
   Creates a post.
 
   ## Examples

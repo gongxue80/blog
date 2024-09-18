@@ -4,8 +4,20 @@ defmodule BlogWeb.PostLiveTest do
   import Phoenix.LiveViewTest
   import Blog.PostsFixtures
 
-  @create_attrs %{status: "some status", title: "some title", content: "some content", slug: "some slug", published_at: "2024-09-04T13:12:00Z"}
-  @update_attrs %{status: "some updated status", title: "some updated title", content: "some updated content", slug: "some updated slug", published_at: "2024-09-05T13:12:00Z"}
+  @create_attrs %{
+    status: "some status",
+    title: "some title",
+    content: "some content",
+    slug: "some slug",
+    published_at: "2024-09-04T13:12:00Z"
+  }
+  @update_attrs %{
+    status: "some updated status",
+    title: "some updated title",
+    content: "some updated content",
+    slug: "some updated slug",
+    published_at: "2024-09-05T13:12:00Z"
+  }
   @invalid_attrs %{status: "", title: "", content: "", slug: "", published_at: ""}
 
   defp create_post(_) do
@@ -36,8 +48,8 @@ defmodule BlogWeb.PostLiveTest do
              |> render_submit() =~ "can&#39;t be blank"
 
       index_live
-             |> form("#post-form", post: @create_attrs)
-             |> render_submit()
+      |> form("#post-form", post: @create_attrs)
+      |> render_submit()
 
       assert_patch(index_live, ~p"/admin/posts")
 
@@ -59,8 +71,8 @@ defmodule BlogWeb.PostLiveTest do
              |> render_submit() =~ "can&#39;t be blank"
 
       index_live
-             |> form("#post-form", post: @update_attrs)
-             |> render_submit()
+      |> form("#post-form", post: @update_attrs)
+      |> render_submit()
 
       assert_patch(index_live, ~p"/admin/posts")
 

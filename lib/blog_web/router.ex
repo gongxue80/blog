@@ -17,12 +17,13 @@ defmodule BlogWeb.Router do
     plug :accepts, ["json"]
   end
 
-
-
   # Other scopes may use custom stacks.
-  # scope "/api", BlogWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", BlogWeb.Api do
+    pipe_through :api
+
+    get "/posts", PostController, :index
+    get "/posts/:slug", PostController, :show
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:blog, :dev_routes) do
@@ -86,8 +87,6 @@ defmodule BlogWeb.Router do
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
   end
-
-
 
   scope "/", BlogWeb do
     pipe_through :browser

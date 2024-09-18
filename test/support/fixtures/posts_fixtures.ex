@@ -9,6 +9,7 @@ defmodule Blog.PostsFixtures do
   """
   def post_fixture(attrs \\ %{}) do
     slug = :crypto.strong_rand_bytes(16) |> Base.url_encode64() |> binary_part(0, 16)
+
     {:ok, post} =
       attrs
       |> Enum.into(%{
